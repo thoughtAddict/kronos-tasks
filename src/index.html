@@ -34,90 +34,61 @@
         <div
           class="relative z-10 mx-auto px-4 py-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:px-8 xl:px-12"
         >
-          <div class="mb-4 text-center lg:text-left sticky top-0 py-2 bg-slate-50 flex justify-between">
+          <div class="mb-4 sticky top-0 py-2 bg-slate-50 flex justify-between">
             <p class="text-xl font-bold text-slate-900">
               Today's Tasks
             </p>
-<button class="w-8 h-8 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5 text-gray-600">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
-  </svg>
-</button>
+            <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="addNewTaskItem">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
+              </svg>
+            </button>
           </div>
-
-          <div class="-space-y-px mb-4">
-            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
-              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
-              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
-            </div>
-            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
-              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
-            </div>
-          </div>
-
-          <div class="-space-y-px mb-4">
-            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
-              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
-              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
-            </div>
-            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
-              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
-            </div>
-          </div>
-
-          <div class="-space-y-px mb-4">
-            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
-              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-            </div>
-            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
-              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
-            </div>
-            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
-              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
-            </div>
-          </div>
-
+          <div id="taskListSource"></div>
         </div>
       </header>
-      <main class="bg-neutral-50 border-t border-slate-200 lg:relative lg:pb-28 lg:ml-140 lg:border-t-0 xl:ml-160 min-h-screen">
-        <div class="relative">
-          <div class="pb-12 pt-16 sm:pb-4 lg:pt-12">
-            <div class="text-xl text-slate-900 font-bold leading-7 pl-12">
-              Output Task List
+      <main class="bg-neutral-50 border-t border-slate-200 lg:relative lg:ml-140 lg:border-t-0 xl:ml-160 min-h-screen">
+        <div class="relative h-screen">
+          <div class="flex flex-col h-full pb-12 pt-6 sm:pb-4">
+            <div class="mb-4 px-12 py-2 bg-slate-50 flex items-center">
+              <p class="text-xl font-bold text-slate-900">
+                Task List
+              </p>
+              <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center ml-4" id="copyToClipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  
+                     class="w-6 h-6 text-gray-600">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                  <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                  <path d="M9 14l2 2l4 -4" />
+                </svg>
+              </button>
+              <span id="copiedToClipboard" class="ml-4 opacity-0 transition-opacity duration-1000 ease-in-out">
+                Copied to Clipboard
+              </span>
             </div>
-            <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6 px-2 lg:px-12 py-12">
-             Output goes here...
+            <div class="flex-1 px-2 lg:px-12 pb-8">
+              <div 
+                name="taskListOutput" 
+                id="taskListOutput" 
+                class="block w-full h-full p-5 rounded-md bg-white text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+              >
+                <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px;">
+                  <li style="padding: 2px 0;"><strong>Task</strong>: This is a Task Name</li>
+                  <ul style="padding-left: 16px; list-style-type: circle; list-style-position: inside;">
+                    <li style="padding: 2px 0;"><strong>Details</strong>
+                      <ul style="padding-left: 16px; list-style-type: disc; list-style-position: inside;">
+                        <li style="padding: 2px 0;">Detail Item 11</li>
+                        <li style="padding: 2px 0;">Detail Item 21</li>
+                        <li style="padding: 2px 0;">Detail Item 31</li>
+                        <li style="padding: 2px 0;">Detail Item 41</li>
+                      </ul> 
+                    </li>
+                    <li style="padding: 2px 0;"><strong>Estimated Time to Complete</strong>:  12 hours</li>
+                    <li style="padding: 2px 0;"><strong>Dependencies</strong>:  This guy right here.</li>
+                  </ul>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -125,10 +96,224 @@
       <footer class="border-t border-slate-200 bg-slate-50 pt-5 pb-10 lg:hidden">
         <div class="mx-auto md:max-w-2xl">
           <div class="mt-2 text-md font-bold leading-7 text-slate-900 text-center">
-            I Need Serenity
+            Footer Stuff
           </div>
         </div>
       </footer>
     </div>
+
+    <script id="newTaskItemTemplate" type="text/html">
+      <div class="relative -space-y-px mb-4" id="task_<%= id %>">
+        <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded absolute bottom-0 right-[-20px] flex items-center justify-center" id="delete_<%= id %>">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                class="w-4 h-4 text-gray-600">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 7l16 0" />
+            <path d="M10 11l0 6" />
+            <path d="M14 11l0 6" />
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+          </svg>
+        </button>
+        <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
+          <input type="text" name="taskNameValue_<%= id %>" id="taskNameValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
+        </div>
+        <div class="bg-white px-3 py-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <div class="flex justify-between">
+            <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
+            <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="newDetail_<%= id %>">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
+              </svg>
+            </button>
+          </div>
+          <div id="details_<%= id %>">
+            <div class="flex items-center" id="detailItem_<%= id %>_<%= itemId %>">
+              <input type="text" name="detailItemValue_<%= id %>_<%= itemId %>" id="detailItemValue_<%= id %>_<%= itemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <button id="delete_detailItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                      class="w-4 h-4 text-gray-600">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M4 7l16 0" />
+                  <path d="M10 11l0 6" />
+                  <path d="M14 11l0 6" />
+                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
+          <input type="text" name="estimationValue_<%= id %>" id="estimationValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
+        </div>
+        <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
+          <input type="text" name="dependenciesValue_<%= id %>" id="dependenciesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+        </div>
+      </div>
+    </script>
+
+    <script id="newDetailItemTemplate" type="text/html">
+      <div class="flex items-center" id="detailItem_<%= id %>_<%= itemId %>">
+        <input type="text" name="detailItemValue_<%= id %>_<%= itemId %>" id="detailItemValue_<%= id %>_<%= itemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+        <button id="delete_detailItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                class="w-4 h-4 text-gray-600">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 7l16 0" />
+            <path d="M10 11l0 6" />
+            <path d="M14 11l0 6" />
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+          </svg>
+        </button>
+      </div>
+    </script>
+
+    <script>
+
+      document.getElementById('addNewTaskItem').addEventListener('click', (event) => {
+        const newTaskId = generateRandomString(10);
+        const firstDetailItemId = generateRandomString(10);
+        const newTaskItemHTML = tmpl("newTaskItemTemplate", {"id":newTaskId, "itemId":firstDetailItemId});
+        document.getElementById('taskListSource').insertAdjacentHTML('beforeend', newTaskItemHTML);
+
+        document.getElementById('delete_' + newTaskId).addEventListener('click', (event) => {
+          document.getElementById('task_' + newTaskId).remove();
+        });
+
+        document.getElementById('delete_detailItem_' + newTaskId + "_" + firstDetailItemId).addEventListener('click', (event) => {
+          document.getElementById('detailItem_' + newTaskId + "_" + firstDetailItemId).remove();
+        });
+
+        document.getElementById('newDetail_' + newTaskId).addEventListener('click', (event) => {
+          const nextDetailItemId = generateRandomString(10);
+          const newDetailItemHTML = tmpl("newDetailItemTemplate", {"id":newTaskId, "itemId":nextDetailItemId});
+          document.getElementById('details_' + newTaskId).insertAdjacentHTML('beforeend', newDetailItemHTML);
+
+          document.getElementById('delete_detailItem_' + newTaskId + "_" + nextDetailItemId).addEventListener('click', (event) => {
+            document.getElementById('detailItem_' + newTaskId + "_" + nextDetailItemId).remove();
+          });
+        });
+      });
+
+      document.getElementById('copyToClipboard').addEventListener('click', (event) => {
+        highlight('taskListOutput');
+        document.execCommand("copy");
+        showAndFadeSpan('copiedToClipboard');
+      });
+
+      (function(){
+        var cache = {};
+
+        this.tmpl = function tmpl(str, data){
+          // Figure out if we're getting a template, or if we need to
+          // load the template - and be sure to cache the result.
+          var fn = !/\W/.test(str) ?
+            cache[str] = cache[str] ||
+              tmpl(document.getElementById(str).innerHTML) :
+
+            // Generate a reusable function that will serve as a template
+            // generator (and which will be cached).
+            new Function("obj",
+              "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+              // Introduce the data as local variables using with(){}
+              "with(obj){p.push('" +
+
+              // Convert the template into pure JavaScript
+              str
+                .replace(/[\r\t\n]/g, " ")
+                .split("<%").join("\t")
+                .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                .replace(/\t=(.*?)%>/g, "',$1,'")
+                .split("\t").join("');")
+                .split("%>").join("p.push('")
+                .split("\r").join("\\'")
+            + "');}return p.join('');");
+
+          // Provide some basic currying to the user
+          return data ? fn( data ) : fn;
+        };
+      })();
+
+      const generateRandomString = (length, options = {}) => {
+        // Default options
+        const config = {
+            numbers: true,
+            lowercase: true,
+            uppercase: true,
+            special: false,
+            ...options
+        };
+
+        // Character sets
+        const chars = {
+            numbers: '0123456789',
+            lowercase: 'abcdefghijklmnopqrstuvwxyz',
+            uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            special: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+        };
+
+        // Build character pool based on options
+        let charPool = '';
+        if (config.numbers) charPool += chars.numbers;
+        if (config.lowercase) charPool += chars.lowercase;
+        if (config.uppercase) charPool += chars.uppercase;
+        if (config.special) charPool += chars.special;
+
+        if (charPool === '') {
+            throw new Error('At least one character type must be selected');
+        }
+
+        // Generate random string
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charPool.length);
+            result += charPool[randomIndex];
+        }
+
+        return result;
+      };
+
+      const highlight = (id) => {
+        if (document.selection) {
+          var range = document.body.createTextRange();
+          range.moveToElementText(document.getElementById(id));
+          range.select();
+        } else if (window.getSelection) {
+          var range = document.createRange();
+          range.selectNode(document.getElementById(id));
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      };
+
+      const showAndFadeSpan = (element) => {
+        const span = document.getElementById(element);
+        
+        // Reset any existing state
+        span.classList.remove('opacity-100');
+        span.classList.add('opacity-0');
+        
+        // Force a reflow
+        void span.offsetWidth;
+        
+        // Make visible
+        span.classList.remove('opacity-0');
+        span.classList.add('opacity-100');
+        
+        // Start fade out after 2 seconds
+        setTimeout(() => {
+          span.classList.remove('opacity-100');
+          span.classList.add('opacity-0');
+        }, 2000);
+      }
+
+    </script>
+
   </body>
 </html>
