@@ -73,21 +73,6 @@
                 id="taskListOutput" 
                 class="block w-full h-full p-5 rounded-md bg-white text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               >
-                <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px;">
-                  <li style="padding: 2px 0;"><strong>Task</strong>: This is a Task Name</li>
-                  <ul style="padding-left: 16px; list-style-type: circle; list-style-position: inside;">
-                    <li style="padding: 2px 0;"><strong>Details</strong>
-                      <ul style="padding-left: 16px; list-style-type: disc; list-style-position: inside;">
-                        <li style="padding: 2px 0;">Detail Item 11</li>
-                        <li style="padding: 2px 0;">Detail Item 21</li>
-                        <li style="padding: 2px 0;">Detail Item 31</li>
-                        <li style="padding: 2px 0;">Detail Item 41</li>
-                      </ul> 
-                    </li>
-                    <li style="padding: 2px 0;"><strong>Estimated Time to Complete</strong>:  12 hours</li>
-                    <li style="padding: 2px 0;"><strong>Dependencies</strong>:  This guy right here.</li>
-                  </ul>
-                </ul>
               </div>
             </div>
           </div>
@@ -183,10 +168,12 @@
 
         document.getElementById('delete_' + newTaskId).addEventListener('click', (event) => {
           document.getElementById('task_' + newTaskId).remove();
+          refreshTaskListOutput();
         });
 
         document.getElementById('delete_detailItem_' + newTaskId + "_" + firstDetailItemId).addEventListener('click', (event) => {
           document.getElementById('detailItem_' + newTaskId + "_" + firstDetailItemId).remove();
+          refreshTaskListOutput();
         });
 
         document.getElementById('newDetail_' + newTaskId).addEventListener('click', (event) => {
@@ -196,8 +183,13 @@
 
           document.getElementById('delete_detailItem_' + newTaskId + "_" + nextDetailItemId).addEventListener('click', (event) => {
             document.getElementById('detailItem_' + newTaskId + "_" + nextDetailItemId).remove();
+            refreshTaskListOutput();
           });
+
+          refreshTaskListOutput();
         });
+
+        refreshTaskListOutput();
       });
 
       document.getElementById('copyToClipboard').addEventListener('click', (event) => {
@@ -205,6 +197,18 @@
         document.execCommand("copy");
         showAndFadeSpan('copiedToClipboard');
       });
+
+      document.addEventListener('input', function(event) {
+        if (event.target.matches('input')) {
+          refreshTaskListOutput();
+        }
+      });
+
+      const refreshTaskListOutput = () => {
+        const taskListSource = document.getElementById('taskListSource');
+        const formattedHTML = formatTaskListToHTML(taskListSource);
+        document.getElementById('taskListOutput').innerHTML = formattedHTML;
+      }
 
       (function(){
         var cache = {};
@@ -311,6 +315,46 @@
           span.classList.remove('opacity-100');
           span.classList.add('opacity-0');
         }, 2000);
+      }
+
+      function formatTaskListToHTML(taskListSource) {
+        // Get all task divs
+        const taskDivs = taskListSource.getElementsByClassName('relative -space-y-px mb-4');
+        let htmlOutput = '';
+
+        // Process each task div
+        Array.from(taskDivs).forEach(taskDiv => {
+          const taskId = taskDiv.id.split('_')[1];
+          
+          // Get task name input
+          const taskName = taskDiv.querySelector(`#taskNameValue_${taskId}`).value || 'Untitled Task';
+          
+          // Get all detail items for this task
+          const detailsDiv = taskDiv.querySelector(`#details_${taskId}`);
+          const detailItems = detailsDiv ? Array.from(detailsDiv.getElementsByTagName('input')).map(input => input.value).filter(Boolean) : [];
+          
+          // Get estimation and dependencies
+          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not specified';
+          const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || 'None';
+
+          // Build HTML string for this task
+          htmlOutput += `
+            <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 20px;">
+              <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
+              <ul style="padding-left: 20px; list-style-type: circle; list-style-position: inside;">
+                <li style="padding: 2px 0;"><strong>Details</strong>
+                  ${detailItems.length > 0 ? `
+                  <ul style="padding-left: 20px; list-style-type: disc; list-style-position: inside;">
+                    ${detailItems.map(detail => `<li style="padding: 2px 0;">${detail}</li>`).join('')}
+                  </ul>` : ' None'}
+                </li>
+                <li style="padding: 2px 0;"><strong>Estimated Time to Complete</strong>: ${timeEstimate}</li>
+                <li style="padding: 2px 0;"><strong>Dependencies</strong>: ${dependencies}</li>
+              </ul>
+            </ul>`;
+        });
+
+        return htmlOutput;
       }
 
     </script>
