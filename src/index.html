@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" class="h-full bg-white antialiased">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <link
+      rel="preconnect"
+      href="https://cdn.fontshare.com"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap"
+    />
+  </head>
+  <body class="flex min-h-full">
+    <div class="w-full">
+      <header class="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-140 lg:items-start lg:overflow-y-auto xl:w-160 scrollbar-hide">
+        <div
+          class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:leading-7 
+                        lg:[writing-mode:vertical-rl]"
+        >
+          <a href="/" class="text-slate-800 font-bold">
+            Kronos Tasks
+          </a>
+          <a href="/" class="mt-10 text-slate-800 font-bold">
+            Home
+          </a>
+          <a href="/about" class="mt-10 text-slate-900">
+            About
+          </a>
+        </div>
+        <div
+          class="relative z-10 mx-auto px-4 py-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:px-8 xl:px-12"
+        >
+          <div class="mb-4 text-center lg:text-left sticky top-0 py-2 bg-slate-50 flex justify-between">
+            <p class="text-xl font-bold text-slate-900">
+              Today's Tasks
+            </p>
+<button class="w-8 h-8 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5 text-gray-600">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
+  </svg>
+</button>
+          </div>
+
+          <div class="-space-y-px mb-4">
+            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
+              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
+              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
+            </div>
+            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
+              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+            </div>
+          </div>
+
+          <div class="-space-y-px mb-4">
+            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
+              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
+              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
+            </div>
+            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
+              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+            </div>
+          </div>
+
+          <div class="-space-y-px mb-4">
+            <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
+              <input type="text" name="task" id="task" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <input type="text" name="details" id="details" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+            </div>
+            <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
+              <input type="text" name="timeEstimate" id="timeEstimate" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
+            </div>
+            <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
+              <input type="text" name="dependencies" id="dependencies" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+            </div>
+          </div>
+
+        </div>
+      </header>
+      <main class="bg-neutral-50 border-t border-slate-200 lg:relative lg:pb-28 lg:ml-140 lg:border-t-0 xl:ml-160 min-h-screen">
+        <div class="relative">
+          <div class="pb-12 pt-16 sm:pb-4 lg:pt-12">
+            <div class="text-xl text-slate-900 font-bold leading-7 pl-12">
+              Output Task List
+            </div>
+            <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6 px-2 lg:px-12 py-12">
+             Output goes here...
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="border-t border-slate-200 bg-slate-50 pt-5 pb-10 lg:hidden">
+        <div class="mx-auto md:max-w-2xl">
+          <div class="mt-2 text-md font-bold leading-7 text-slate-900 text-center">
+            I Need Serenity
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
