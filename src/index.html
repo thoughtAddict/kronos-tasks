@@ -95,12 +95,12 @@
           </svg>
         </button>
         <div class="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-          <label for="task" class="block text-xs font-medium text-gray-900">Task</label>
+          <label for="taskNameValue_<%= id %>" class="block text-xs font-medium text-gray-900">Task</label>
           <input type="text" name="taskNameValue_<%= id %>" id="taskNameValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Task Name">
         </div>
         <div class="bg-white px-3 py-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
           <div class="flex justify-between">
-            <label for="details" class="block text-xs font-medium text-gray-900">Details</label>
+            <label class="block text-xs font-medium text-gray-900">Details</label>
             <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="newDetail_<%= id %>">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 text-gray-600">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
@@ -125,11 +125,19 @@
           </div>
         </div>
         <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-          <label for="timeEstimate" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
+          <label for="estimationValue_<%= id %>" class="block text-xs font-medium text-gray-900">Estimated Time to Complete</label>
           <input type="text" name="estimationValue_<%= id %>" id="estimationValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes, Hours, Days, Weeks?">
         </div>
+        <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
+          <label for="timeSpentValue_<%= id %>" class="block text-xs font-medium text-gray-900">Time Spent Today</label>
+          <input type="text" name="timeSpentValue_<%= id %>" id="timeSpentValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes / Hours">
+        </div>
+        <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
+          <label for="challengesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Challenges</label>
+          <input type="text" name="challengesValue_<%= id %>" id="challengesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="What challenges came up?">
+        </div>
         <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-          <label for="dependencies" class="block text-xs font-medium text-gray-900">Dependencies</label>
+          <label for="dependenciesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Dependencies</label>
           <input type="text" name="dependenciesValue_<%= id %>" id="dependenciesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
         </div>
       </div>
@@ -202,24 +210,20 @@
 
       document.getElementById('todaysTasksAction').addEventListener('click', (event) => {
         modeSelected = "todaysTasksAction";
-        /*
-        document.getElementById("endOfDayUpdateAction").classList.remove("active-mode");
-        document.getElementById("endOfDayUpdateAction").classList.add("inactive-mode");
-        document.getElementById("todaysTasksAction").classList.remove("inactive-mode");
-        document.getElementById("todaysTasksAction").classList.add("active-mode");
-        */
         toggleMode('todaysTasksAction', 'endOfDayUpdateAction');
+        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
+        Array.from(endOfDayElements).forEach(element => {
+          element.classList.add('hidden');
+        });
       });
 
       document.getElementById('endOfDayUpdateAction').addEventListener('click', (event) => {
         modeSelected = "endOfDayUpdateAction";
-        /*
-        document.getElementById("todaysTasksAction").classList.remove("active-mode");
-        document.getElementById("todaysTasksAction").classList.add("inactive-mode");
-        document.getElementById("endOfDayUpdateAction").classList.remove("inactive-mode");
-        document.getElementById("endOfDayUpdateAction").classList.add("active-mode");
-        */
         toggleMode('endOfDayUpdateAction', 'todaysTasksAction');
+        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
+        Array.from(endOfDayElements).forEach(element => {
+          element.classList.remove('hidden');
+        });
       });
 
       const refreshTaskListOutput = () => {
