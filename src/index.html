@@ -193,6 +193,12 @@
           refreshTaskListOutput();
         });
 
+        if (modeSelected === "todaysTasksAction") {
+          hideEndOfDayElements();
+        } else {
+          showEndOfDayElements();
+        }
+
         refreshTaskListOutput();
       });
 
@@ -211,26 +217,26 @@
       document.getElementById('todaysTasksAction').addEventListener('click', (event) => {
         modeSelected = "todaysTasksAction";
         toggleMode('todaysTasksAction', 'endOfDayUpdateAction');
+        /*
         const endOfDayElements = document.getElementsByClassName('end-of-day-element');
         Array.from(endOfDayElements).forEach(element => {
           element.classList.add('hidden');
         });
+        */
+        hideEndOfDayElements();
       });
 
       document.getElementById('endOfDayUpdateAction').addEventListener('click', (event) => {
         modeSelected = "endOfDayUpdateAction";
         toggleMode('endOfDayUpdateAction', 'todaysTasksAction');
+        /*
         const endOfDayElements = document.getElementsByClassName('end-of-day-element');
         Array.from(endOfDayElements).forEach(element => {
           element.classList.remove('hidden');
         });
+        */
+        showEndOfDayElements();
       });
-
-      const refreshTaskListOutput = () => {
-        const taskListSource = document.getElementById('taskListSource');
-        const formattedHTML = formatTaskListToHTML(taskListSource);
-        document.getElementById('taskListOutput').innerHTML = formattedHTML;
-      }
 
       (function(){
         var cache = {};
@@ -265,6 +271,26 @@
           return data ? fn( data ) : fn;
         };
       })();
+
+      const refreshTaskListOutput = () => {
+        const taskListSource = document.getElementById('taskListSource');
+        const formattedHTML = formatTaskListToHTML(taskListSource);
+        document.getElementById('taskListOutput').innerHTML = formattedHTML;
+      }
+
+      const hideEndOfDayElements = () => {
+        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
+        Array.from(endOfDayElements).forEach(element => {
+          element.classList.add('hidden');
+        });
+      }
+
+      const showEndOfDayElements = () => {
+        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
+        Array.from(endOfDayElements).forEach(element => {
+          element.classList.remove('hidden');
+        });
+      }
 
       const generateRandomString = (length, options = {}) => {
         // Default options
