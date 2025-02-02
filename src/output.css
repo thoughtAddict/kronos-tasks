@@ -803,6 +803,10 @@ select {
   z-index: 10;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }

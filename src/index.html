@@ -27,7 +27,7 @@
         <div
           class="relative z-10 mx-auto px-4 py-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:px-8 xl:px-12"
         >
-          <div class="mb-4 sticky top-0 pb-1 bg-slate-50 flex justify-between items-center">
+          <div class="mb-4 sticky top-0 pb-1 bg-slate-50 flex justify-between items-center z-50">
             <div class="inline-flex rounded-md items-center">
               <button id="todaysTasksAction" type="button" class="relative w-48 hover:bg-gray-200 px-3 py-2 active-mode">Today's Tasks</button>
               <button id="endOfDayUpdateAction" type="button" class="relative w-48 hover:bg-gray-200 px-3 py-2 inactive-mode">End of Day Update</button>
@@ -44,7 +44,7 @@
       <main class="bg-neutral-50 border-t border-slate-200 lg:relative lg:ml-140 lg:border-t-0 xl:ml-160 min-h-screen">
         <div class="relative h-screen">
           <div class="flex flex-col h-full pb-12 pt-6 sm:pb-4">
-            <div class="mb-4 px-12 py-2 bg-slate-50 flex items-center">
+            <div class="mb-4 sticky top-0 px-12 py-2 bg-slate-50 flex items-center">
               <p class="text-xl font-bold text-slate-900">
                 Task List
               </p>
@@ -61,7 +61,7 @@
                 Copied to Clipboard
               </span>
             </div>
-            <div class="flex-1 px-2 lg:px-12 pb-8">
+            <div class="flex-1 px-2 lg:px-12 pb-8 bg-neutral-50">
               <div 
                 name="taskListOutput" 
                 id="taskListOutput" 
@@ -147,10 +147,10 @@
             name="taskStatusValue_<%= id %>" 
             class="col-start-1 row-start-1 w-full appearance-none border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 bg-white py-1.5 pl-3 pr-8 text-base text-gray-400 sm:text-sm/6"
           >
-            <option value="">Select a Task Status</option>
-            <option value="completed">Completed</option>
-            <option value="in-progress">In Progress</option>
-            <option value="rescheduled">Rescheduled</option>
+            <option value="Not Specified">Select a Task Status</option>
+            <option value="Completed">Completed</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Rescheduled">Rescheduled</option>
           </select>
         </div>
         <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 border-l border-r border-b border-gray-300 h-0.5"></div>
@@ -197,6 +197,7 @@
         document.getElementById('taskStatusValue_' + newTaskId).addEventListener('change', function() {
           this.classList.toggle('text-gray-400', !this.value);
           this.classList.toggle('text-gray-900', this.value);
+          refreshTaskListOutput();
         });
 
         document.getElementById('newDetail_' + newTaskId).addEventListener('click', (event) => {
@@ -407,7 +408,7 @@
           const detailItems = detailsDiv ? Array.from(detailsDiv.getElementsByTagName('input')).map(input => input.value).filter(Boolean) : [];
           
           // Get estimation and dependencies
-          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not specified';
+          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not Specified';
           const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || 'None';
 
           // Generate the HTML
@@ -433,11 +434,19 @@
       const formatEndOfDaysUpdateToHTML = (taskListSource) => {
         // Get all task divs
         const taskDivs = taskListSource.getElementsByClassName('relative -space-y-px mb-4');
-        let htmlOutput = '';
+        
+        // Create an object to group tasks by status
+        const tasksByStatus = {
+          'Not Specified': [],
+          'Completed': [],
+          'In Progress': [],
+          'Rescheduled': []
+        };
 
-        // Process each task div
+        // Process each task div and group by status
         Array.from(taskDivs).forEach(taskDiv => {
           const taskId = taskDiv.id.split('_')[1];
+          const taskStatus = taskDiv.querySelector(`#taskStatusValue_${taskId}`).value || 'Not Specified';
           
           // Get task name input
           const taskName = taskDiv.querySelector(`#taskNameValue_${taskId}`).value || 'Untitled Task';
@@ -446,17 +455,15 @@
           const detailsDiv = taskDiv.querySelector(`#details_${taskId}`);
           const detailItems = detailsDiv ? Array.from(detailsDiv.getElementsByTagName('input')).map(input => input.value).filter(Boolean) : [];
           
-          // Get estimation and dependencies
-          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not specified';
+          // Get all the task information
+          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not Specified';
           const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || 'None';
-
-          // Get time spent and challenges
-          const timeSpent = taskDiv.querySelector(`#timeSpentValue_${taskId}`).value || 'Not specified';
+          const timeSpent = taskDiv.querySelector(`#timeSpentValue_${taskId}`).value || 'Not Specified';
           const challenges = taskDiv.querySelector(`#challengesValue_${taskId}`).value || 'None';
 
-          // Generate the HTML
-          htmlOutput += `
-            <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 20px;">
+          // Create the task HTML
+          const taskHTML = `
+            <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 30px;">
               <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
               <ul style="padding-left: 20px; list-style-type: circle; list-style-position: inside;">
                 <li style="padding: 2px 0;"><strong>Details</strong>
@@ -472,10 +479,28 @@
               </ul>
             </ul>`;
 
+          // Add to appropriate status group
+          if (tasksByStatus.hasOwnProperty(taskStatus)) {
+            tasksByStatus[taskStatus].push(taskHTML);
+          }
+        });
+
+        // Generate final HTML with headers for each status
+        let htmlOutput = '';
+        
+        Object.entries(tasksByStatus).forEach(([status, tasks]) => {
+          if (tasks.length > 0) {
+            // Add header for this status group
+            htmlOutput += `
+              <div style="margin-bottom: 10px; padding: 2px 10px; background-color: #f5f5f5; border-radius: 5px;">
+                <h2 style="margin: 0; font-size: 18px; color: #333;">${status} Tasks</h2>
+              </div>
+              ${tasks.join('')}`;
+          }
         });
 
         return htmlOutput;
-      }
+      };
     </script>
 
   </body>
