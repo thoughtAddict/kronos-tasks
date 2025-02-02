@@ -132,14 +132,28 @@
           <label for="timeSpentValue_<%= id %>" class="block text-xs font-medium text-gray-900">Time Spent Today</label>
           <input type="text" name="timeSpentValue_<%= id %>" id="timeSpentValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes / Hours">
         </div>
+        <div class="bg-white px-3 pt-2.5 border-l border-r border-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <label for="dependenciesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Dependencies</label>
+          <input type="text" name="dependenciesValue_<%= id %>" id="dependenciesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+        </div>
         <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
           <label for="challengesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Challenges</label>
           <input type="text" name="challengesValue_<%= id %>" id="challengesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="What challenges came up?">
         </div>
-        <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-          <label for="dependenciesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Dependencies</label>
-          <input type="text" name="dependenciesValue_<%= id %>" id="dependenciesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
+        <div class="bg-white px-3 pt-2.5 border-l border-r border-t border-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
+          <label class="block text-xs font-medium text-gray-900">Status</label>
+          <select 
+            id="taskStatusValue_<%= id %>" 
+            name="taskStatusValue_<%= id %>" 
+            class="col-start-1 row-start-1 w-full appearance-none border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 bg-white py-1.5 pl-3 pr-8 text-base text-gray-400 sm:text-sm/6"
+          >
+            <option value="">Select a Task Status</option>
+            <option value="completed">Completed</option>
+            <option value="in-progress">In Progress</option>
+            <option value="rescheduled">Rescheduled</option>
+          </select>
         </div>
+        <div class="rounded-b-md bg-white px-3 pb-1.5 pt-2.5 border-l border-r border-b border-gray-300 h-0.5"></div>
       </div>
     </script>
 
@@ -180,6 +194,11 @@
           refreshTaskListOutput();
         });
 
+        document.getElementById('taskStatusValue_' + newTaskId).addEventListener('change', function() {
+          this.classList.toggle('text-gray-400', !this.value);
+          this.classList.toggle('text-gray-900', this.value);
+        });
+
         document.getElementById('newDetail_' + newTaskId).addEventListener('click', (event) => {
           const nextDetailItemId = generateRandomString(10);
           const newDetailItemHTML = tmpl("newDetailItemTemplate", {"id":newTaskId, "itemId":nextDetailItemId});
@@ -217,24 +236,12 @@
       document.getElementById('todaysTasksAction').addEventListener('click', (event) => {
         modeSelected = "todaysTasksAction";
         toggleMode('todaysTasksAction', 'endOfDayUpdateAction');
-        /*
-        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
-        Array.from(endOfDayElements).forEach(element => {
-          element.classList.add('hidden');
-        });
-        */
         hideEndOfDayElements();
       });
 
       document.getElementById('endOfDayUpdateAction').addEventListener('click', (event) => {
         modeSelected = "endOfDayUpdateAction";
         toggleMode('endOfDayUpdateAction', 'todaysTasksAction');
-        /*
-        const endOfDayElements = document.getElementsByClassName('end-of-day-element');
-        Array.from(endOfDayElements).forEach(element => {
-          element.classList.remove('hidden');
-        });
-        */
         showEndOfDayElements();
       });
 
@@ -274,7 +281,12 @@
 
       const refreshTaskListOutput = () => {
         const taskListSource = document.getElementById('taskListSource');
-        const formattedHTML = formatTaskListToHTML(taskListSource);
+        let formattedHTML = "";
+        if (modeSelected === "todaysTasksAction") {
+          formattedHTML = formatTodaysTasksToHTML(taskListSource);
+        } else {
+          formattedHTML = formatEndOfDaysUpdateToHTML(taskListSource);
+        }
         document.getElementById('taskListOutput').innerHTML = formattedHTML;
       }
 
@@ -283,6 +295,7 @@
         Array.from(endOfDayElements).forEach(element => {
           element.classList.add('hidden');
         });
+        refreshTaskListOutput();
       }
 
       const showEndOfDayElements = () => {
@@ -290,6 +303,7 @@
         Array.from(endOfDayElements).forEach(element => {
           element.classList.remove('hidden');
         });
+        refreshTaskListOutput();
       }
 
       const generateRandomString = (length, options = {}) => {
@@ -376,7 +390,7 @@
         inactiveElement.classList.add('inactive-mode');
       };
 
-      const formatTaskListToHTML = (taskListSource) => {
+      const formatTodaysTasksToHTML = (taskListSource) => {
         // Get all task divs
         const taskDivs = taskListSource.getElementsByClassName('relative -space-y-px mb-4');
         let htmlOutput = '';
@@ -396,7 +410,7 @@
           const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not specified';
           const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || 'None';
 
-          // Build HTML string for this task
+          // Generate the HTML
           htmlOutput += `
             <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 20px;">
               <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
@@ -416,6 +430,52 @@
         return htmlOutput;
       }
 
+      const formatEndOfDaysUpdateToHTML = (taskListSource) => {
+        // Get all task divs
+        const taskDivs = taskListSource.getElementsByClassName('relative -space-y-px mb-4');
+        let htmlOutput = '';
+
+        // Process each task div
+        Array.from(taskDivs).forEach(taskDiv => {
+          const taskId = taskDiv.id.split('_')[1];
+          
+          // Get task name input
+          const taskName = taskDiv.querySelector(`#taskNameValue_${taskId}`).value || 'Untitled Task';
+          
+          // Get all detail items for this task
+          const detailsDiv = taskDiv.querySelector(`#details_${taskId}`);
+          const detailItems = detailsDiv ? Array.from(detailsDiv.getElementsByTagName('input')).map(input => input.value).filter(Boolean) : [];
+          
+          // Get estimation and dependencies
+          const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || 'Not specified';
+          const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || 'None';
+
+          // Get time spent and challenges
+          const timeSpent = taskDiv.querySelector(`#timeSpentValue_${taskId}`).value || 'Not specified';
+          const challenges = taskDiv.querySelector(`#challengesValue_${taskId}`).value || 'None';
+
+          // Generate the HTML
+          htmlOutput += `
+            <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 20px;">
+              <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
+              <ul style="padding-left: 20px; list-style-type: circle; list-style-position: inside;">
+                <li style="padding: 2px 0;"><strong>Details</strong>
+                  ${detailItems.length > 0 ? `
+                  <ul style="padding-left: 20px; list-style-type: disc; list-style-position: inside;">
+                    ${detailItems.map(detail => `<li style="padding: 2px 0;">${detail}</li>`).join('')}
+                  </ul>` : ' None'}
+                </li>
+                <li style="padding: 2px 0;"><strong>Estimated Time to Complete</strong>: ${timeEstimate}</li>
+                <li style="padding: 2px 0;"><strong>Time Spent Today</strong>: ${timeSpent}</li>
+                <li style="padding: 2px 0;"><strong>Dependencies</strong>: ${dependencies}</li>
+                <li style="padding: 2px 0;"><strong>Challenges</strong>: ${challenges}</li>
+              </ul>
+            </ul>`;
+
+        });
+
+        return htmlOutput;
+      }
     </script>
 
   </body>
