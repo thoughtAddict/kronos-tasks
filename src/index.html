@@ -8,11 +8,11 @@
     <link href="https://fonts.bunny.net/css?family=noto-sans:400,500,700" rel="stylesheet" />
   </head>
   <body class="flex min-h-full">
+
     <div class="w-full">
       <header class="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-140 lg:items-start lg:overflow-y-auto xl:w-160 scrollbar-hide">
         <div
-          class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:leading-7 
-                        lg:[writing-mode:vertical-rl]"
+          class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:leading-7 lg:[writing-mode:vertical-rl]"
         >
           <a href="/" class="text-slate-800 font-bold">
             Kronos Tasks
@@ -27,10 +27,11 @@
         <div
           class="relative z-10 mx-auto px-4 py-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:px-8 xl:px-12"
         >
-          <div class="mb-4 sticky top-0 py-2 bg-slate-50 flex justify-between">
-            <p class="text-xl font-bold text-slate-900">
-              Today's Tasks
-            </p>
+          <div class="mb-4 sticky top-0 pb-1 bg-slate-50 flex justify-between items-center">
+            <div class="inline-flex rounded-md items-center">
+              <button id="todaysTasksAction" type="button" class="relative w-48 hover:bg-gray-200 px-3 py-2 active-mode">Today's Tasks</button>
+              <button id="endOfDayUpdateAction" type="button" class="relative w-48 hover:bg-gray-200 px-3 py-2 inactive-mode">End of Day Update</button>
+            </div>
             <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="addNewTaskItem">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6 text-gray-600">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
@@ -153,6 +154,8 @@
 
     <script>
 
+      let modeSelected = "todaysTasksAction";
+
       document.getElementById('addNewTaskItem').addEventListener('click', (event) => {
         const newTaskId = generateRandomString(10);
         const firstDetailItemId = generateRandomString(10);
@@ -195,6 +198,28 @@
         if (event.target.matches('input')) {
           refreshTaskListOutput();
         }
+      });
+
+      document.getElementById('todaysTasksAction').addEventListener('click', (event) => {
+        modeSelected = "todaysTasksAction";
+        /*
+        document.getElementById("endOfDayUpdateAction").classList.remove("active-mode");
+        document.getElementById("endOfDayUpdateAction").classList.add("inactive-mode");
+        document.getElementById("todaysTasksAction").classList.remove("inactive-mode");
+        document.getElementById("todaysTasksAction").classList.add("active-mode");
+        */
+        toggleMode('todaysTasksAction', 'endOfDayUpdateAction');
+      });
+
+      document.getElementById('endOfDayUpdateAction').addEventListener('click', (event) => {
+        modeSelected = "endOfDayUpdateAction";
+        /*
+        document.getElementById("todaysTasksAction").classList.remove("active-mode");
+        document.getElementById("todaysTasksAction").classList.add("inactive-mode");
+        document.getElementById("endOfDayUpdateAction").classList.remove("inactive-mode");
+        document.getElementById("endOfDayUpdateAction").classList.add("active-mode");
+        */
+        toggleMode('endOfDayUpdateAction', 'todaysTasksAction');
       });
 
       const refreshTaskListOutput = () => {
@@ -310,7 +335,18 @@
         }, 2000);
       }
 
-      function formatTaskListToHTML(taskListSource) {
+      const toggleMode = (activeId, inactiveId) => {
+        const activeElement = document.getElementById(activeId);
+        const inactiveElement = document.getElementById(inactiveId);
+        
+        activeElement.classList.remove('inactive-mode');
+        activeElement.classList.add('active-mode');
+        
+        inactiveElement.classList.remove('active-mode');
+        inactiveElement.classList.add('inactive-mode');
+      };
+
+      const formatTaskListToHTML = (taskListSource) => {
         // Get all task divs
         const taskDivs = taskListSource.getElementsByClassName('relative -space-y-px mb-4');
         let htmlOutput = '';

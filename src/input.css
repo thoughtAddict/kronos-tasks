@@ -11,3 +11,13 @@
     display: none;  /* Chrome, Safari and Opera */
   }
 }
+
+@layer components {
+  .active-mode {
+    @apply rounded-t bg-white font-semibold text-gray-900 ring-1 ring-inset ring-gray-300;
+  }
+
+  .inactive-mode {
+    @apply text-gray-500 border-b;
+  }
+}
