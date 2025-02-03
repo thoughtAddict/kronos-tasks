@@ -1,16 +1,21 @@
 let modeSelected = "todaysTasksAction";
 
+// --------------------------------------------
+// Event Listeners that power the tasks page
+// --------------------------------------------
 document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
   const newTaskId = generateRandomString(10);
   const firstDetailItemId = generateRandomString(10);
   const newTaskItemHTML = tmpl("newTaskItemTemplate", { id: newTaskId, itemId: firstDetailItemId });
   document.getElementById("taskListSource").insertAdjacentHTML("beforeend", newTaskItemHTML);
 
+  // Task Deletion
   document.getElementById("delete_" + newTaskId).addEventListener("click", (event) => {
     document.getElementById("task_" + newTaskId).remove();
     refreshTaskListOutput();
   });
 
+  // Detail Item Deletion
   document
     .getElementById("delete_detailItem_" + newTaskId + "_" + firstDetailItemId)
     .addEventListener("click", (event) => {
@@ -18,17 +23,20 @@ document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
       refreshTaskListOutput();
     });
 
+  // Task Status Select control text color
   document.getElementById("taskStatusValue_" + newTaskId).addEventListener("change", function () {
     this.classList.toggle("text-gray-400", !this.value);
     this.classList.toggle("text-gray-900", this.value);
     refreshTaskListOutput();
   });
 
+  // Add a new Detail Item
   document.getElementById("newDetail_" + newTaskId).addEventListener("click", (event) => {
     const nextDetailItemId = generateRandomString(10);
     const newDetailItemHTML = tmpl("newDetailItemTemplate", { id: newTaskId, itemId: nextDetailItemId });
     document.getElementById("details_" + newTaskId).insertAdjacentHTML("beforeend", newDetailItemHTML);
 
+    // The new Detail Item's Deletion event
     document
       .getElementById("delete_detailItem_" + newTaskId + "_" + nextDetailItemId)
       .addEventListener("click", (event) => {
@@ -48,30 +56,40 @@ document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
   refreshTaskListOutput();
 });
 
+// Copy to Clipboard (Will look for a better way to perform this, without using the "execCommand".)
 document.getElementById("copyToClipboard").addEventListener("click", (event) => {
   highlight("taskListOutput");
   document.execCommand("copy");
   showAndFadeSpan("copiedToClipboard");
 });
 
+// Refresh the Task Output DIV when anything is entered in the Tasks section.
 document.addEventListener("input", function (event) {
   if (event.target.matches("input")) {
     refreshTaskListOutput();
   }
 });
 
+// Today's Task Mode button
 document.getElementById("todaysTasksAction").addEventListener("click", (event) => {
   modeSelected = "todaysTasksAction";
   toggleMode("todaysTasksAction", "endOfDayUpdateAction");
   hideEndOfDayElements();
 });
 
+// End of Day Mode button
 document.getElementById("endOfDayUpdateAction").addEventListener("click", (event) => {
   modeSelected = "endOfDayUpdateAction";
   toggleMode("endOfDayUpdateAction", "todaysTasksAction");
   showEndOfDayElements();
 });
 
+// --------------------------------------------
+// Yes, this is John Resig's "Micro-Templating"
+// logic from 2008. It has served me well since
+// discovering it, and it works well for Kronos
+// Tasks simple logic.
+// --------------------------------------------
 (function () {
   var cache = {};
 
@@ -108,6 +126,9 @@ document.getElementById("endOfDayUpdateAction").addEventListener("click", (event
   };
 })();
 
+// --------------------------------------------
+// General (self-explanatory) functions
+// --------------------------------------------
 const refreshTaskListOutput = () => {
   const taskListSource = document.getElementById("taskListSource");
   let formattedHTML = "";
