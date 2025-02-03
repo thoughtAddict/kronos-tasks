@@ -8,11 +8,11 @@ This and the email app that we use isn't the best when it comes to the copy/past
 
 So with that, I decided to create the <em>Kronos Tasks</em> page that you're viewing now.
 
-## No External Dependencies
+## No External Dependencies or Frameworks
 
 It's a single file that uses Javascript, HTML, and CSS (Tailwind).
 
-It'll help create task lists that can be copy/pasted into whatever email app, or document, you use for task updates.
+It'll help create task lists that can then be copy/pasted into whatever email app, or document, you use for your task updates.
 
 ## License
 
