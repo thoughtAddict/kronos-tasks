@@ -14,6 +14,14 @@ It's a single file that uses Javascript, HTML, and CSS (Tailwind).
 
 It'll help create task lists that can then be copy/pasted into whatever email app, or document, you use for your task updates.
 
+## Tailwind
+
+If you wanted to checkout and alter the CSS for your own needs, I'm using Tailwind v3.4.17, along with the command:
+
+```
+npx tailwindcss -i ./src/input.css -o ./src/style.css
+```
+
 ## License
 
 MIT
