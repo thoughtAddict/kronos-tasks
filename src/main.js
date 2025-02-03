@@ -98,9 +98,7 @@ document.getElementById("endOfDayUpdateAction").addEventListener("click", (event
     // load the template - and be sure to cache the result.
     var fn = !/\W/.test(str)
       ? (cache[str] = cache[str] || tmpl(document.getElementById(str).innerHTML))
-      : // Generate a reusable function that will serve as a template
-        // generator (and which will be cached).
-        new Function(
+      : new Function(
           "obj",
           "var p=[],print=function(){p.push.apply(p,arguments);};" +
             // Introduce the data as local variables using with(){}
