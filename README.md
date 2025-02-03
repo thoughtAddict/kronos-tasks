@@ -22,6 +22,13 @@ If you wanted to checkout and alter the CSS for your own needs, I'm using Tailwi
 npx tailwindcss -i ./src/input.css -o ./src/style.css
 ```
 
+## Road Map
+
+- Find a better method to use for "Copy to Clipboard"
+- Save tasks to LocalStorage
+- Provide way to clear LocalStorage
+- Import / Export of Tasks
+
 ## License
 
 MIT
