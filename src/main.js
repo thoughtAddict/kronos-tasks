@@ -6,7 +6,12 @@ let modeSelected = "todaysTasksAction";
 document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
   const newTaskId = generateRandomString(10);
   const firstDetailItemId = generateRandomString(10);
-  const newTaskItemHTML = tmpl("newTaskItemTemplate", { id: newTaskId, itemId: firstDetailItemId });
+  const firstChallengeItemId = generateRandomString(10);
+  const newTaskItemHTML = tmpl("newTaskItemTemplate", {
+    id: newTaskId,
+    detailItemId: firstDetailItemId,
+    challengeItemId: firstChallengeItemId,
+  });
   document.getElementById("taskListSource").insertAdjacentHTML("beforeend", newTaskItemHTML);
 
   // Task Deletion
@@ -20,6 +25,14 @@ document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
     .getElementById("delete_detailItem_" + newTaskId + "_" + firstDetailItemId)
     .addEventListener("click", (event) => {
       document.getElementById("detailItem_" + newTaskId + "_" + firstDetailItemId).remove();
+      refreshTaskListOutput();
+    });
+
+  // Challenge Item Deletion
+  document
+    .getElementById("delete_challengeItem_" + newTaskId + "_" + firstChallengeItemId)
+    .addEventListener("click", (event) => {
+      document.getElementById("challengeItem_" + newTaskId + "_" + firstChallengeItemId).remove();
       refreshTaskListOutput();
     });
 
@@ -41,6 +54,23 @@ document.getElementById("addNewTaskItem").addEventListener("click", (event) => {
       .getElementById("delete_detailItem_" + newTaskId + "_" + nextDetailItemId)
       .addEventListener("click", (event) => {
         document.getElementById("detailItem_" + newTaskId + "_" + nextDetailItemId).remove();
+        refreshTaskListOutput();
+      });
+
+    refreshTaskListOutput();
+  });
+
+  // Add a new Challenge Item
+  document.getElementById("newChallenge_" + newTaskId).addEventListener("click", (event) => {
+    const nextChallengeItemId = generateRandomString(10);
+    const newChallengeItemHTML = tmpl("newChallengeItemTemplate", { id: newTaskId, itemId: nextChallengeItemId });
+    document.getElementById("challenges_" + newTaskId).insertAdjacentHTML("beforeend", newChallengeItemHTML);
+
+    // The new Challenge Item's Deletion event
+    document
+      .getElementById("delete_challengeItem_" + newTaskId + "_" + nextChallengeItemId)
+      .addEventListener("click", (event) => {
+        document.getElementById("challengeItem_" + newTaskId + "_" + nextChallengeItemId).remove();
         refreshTaskListOutput();
       });
 
@@ -318,11 +348,18 @@ const formatEndOfDaysUpdateToHTML = (taskListSource) => {
     const timeEstimate = taskDiv.querySelector(`#estimationValue_${taskId}`).value || "Not Specified";
     const dependencies = taskDiv.querySelector(`#dependenciesValue_${taskId}`).value || "None";
     const timeSpent = taskDiv.querySelector(`#timeSpentValue_${taskId}`).value || "Not Specified";
-    const challenges = taskDiv.querySelector(`#challengesValue_${taskId}`).value || "None";
+
+    // Get all challenge items for this task
+    const challengesDiv = taskDiv.querySelector(`#challenges_${taskId}`);
+    const challengeItems = challengesDiv
+      ? Array.from(challengesDiv.getElementsByTagName("input"))
+          .map((input) => input.value)
+          .filter(Boolean)
+      : [];
 
     // Create the task HTML
     const taskHTML = `
-      <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 30px;">
+      <ul style="list-style-type: disc; list-style-position: inside; font-size: 14px; margin-bottom: 30px;">
         <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
         <ul style="padding-left: 20px; list-style-type: circle; list-style-position: inside;">
           <li style="padding: 2px 0;"><strong>Details</strong>
@@ -338,7 +375,16 @@ const formatEndOfDaysUpdateToHTML = (taskListSource) => {
           <li style="padding: 2px 0;"><strong>Estimated Time to Complete</strong>: ${timeEstimate}</li>
           <li style="padding: 2px 0;"><strong>Time Spent Today</strong>: ${timeSpent}</li>
           <li style="padding: 2px 0;"><strong>Dependencies</strong>: ${dependencies}</li>
-          <li style="padding: 2px 0;"><strong>Challenges</strong>: ${challenges}</li>
+          <li style="padding: 2px 0;"><strong>Challenges: </strong>
+            ${
+              challengeItems.length > 0
+                ? `
+            <ul style="padding-left: 20px; list-style-type: disc; list-style-position: inside;">
+              ${challengeItems.map((challenge) => `<li style="padding: 2px 0;">${challenge}</li>`).join("")}
+            </ul>`
+                : " None"
+            }
+          </li>
         </ul>
       </ul>`;
 
@@ -356,7 +402,7 @@ const formatEndOfDaysUpdateToHTML = (taskListSource) => {
       // Add header for this status group
       htmlOutput += `
         <div style="margin-bottom: 16px; padding: 2px 10px 4px 10px; border-bottom: 1px solid;">
-          <h2 style="margin-bottom: 6px; font-size: 18px; color: #333;">${status} Tasks</h2>
+          <h2 style="margin-bottom: 6px; font-size: 14px; color: #333;">${status} Tasks</h2>
         </div>
         ${tasks.join("")}`;
     }
