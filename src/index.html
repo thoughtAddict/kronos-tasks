@@ -7,6 +7,20 @@
     <link href="./style.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=noto-sans:400,500,700" rel="stylesheet" />
+
+    <meta name="description" content="Create and track daily tasks with time estimates, dependencies, and progress updates. Streamline your workflow by generating task lists that can be used within your morning emails and end-of-day reporting - all in one simple interface.">
+    <meta name="author" content="Jon D Cruz">
+    <link rel="canonical" href="https://www.kronostasks.io">
+    <meta property="og:title" content="Kronos Tasks: Daily Task Management Made Simple">
+    <meta property="og:description" content="Create and track daily tasks with time estimates, dependencies, and progress updates. Streamline your workflow by generating task lists that can be used within your morning emails and end-of-day reporting - all in one simple interface.">
+    <meta property="og:url" content="https://www.kronostasks.io">
+    <meta property="og:site_name" content="Kronos Tasks">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <!--<meta property="og:image" content="">-->
+    <!--<meta property="og:image:alt" content="">-->
+    <!--<meta property="og:image:type" content="image/jpeg">-->
+    <!--<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16">-->
   </head>
   <body class="flex min-h-full">
 
@@ -38,10 +52,10 @@
           </div>
           <div class="mb-4 sticky top-0 pb-1 bg-slate-50 flex justify-between items-center z-50">
             <div class="inline-flex rounded-md items-center">
-              <button id="todaysTasksAction" type="button" class="relative text-sm lg:text-base w-36 lg:w-48 hover:bg-gray-200 px-2 py-1 lg:px-3 lg:py-2 active-mode">Today's Tasks</button>
-              <button id="endOfDayUpdateAction" type="button" class="relative text-sm lg:text-base w-36 lg:w-48 hover:bg-gray-200 px-3 py-2 inactive-mode">End of Day</button>
+              <button id="todaysTasksAction" name="todaysTasksAction" type="button" class="relative text-sm lg:text-base w-36 lg:w-48 hover:bg-gray-200 px-2 py-1 lg:px-3 lg:py-2 active-mode">Today's Tasks</button>
+              <button id="endOfDayUpdateAction" name="endOfDayUpdateAction" type="button" class="relative text-sm lg:text-base w-36 lg:w-48 hover:bg-gray-200 px-3 py-2 inactive-mode">End of Day</button>
             </div>
-            <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="addNewTaskItem">
+            <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="addNewTaskItem" name="addNewTaskItem">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6 text-gray-600">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
               </svg>
@@ -57,7 +71,7 @@
               <p class="text-base lg:text-xl font-bold text-slate-900">
                 Task List
               </p>
-              <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center ml-4" id="copyToClipboard">
+              <button class="w-6 h-6 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center ml-4" id="copyToClipboard" name="copyToClipboard">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  
                      class="w-6 h-6 text-gray-600">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -85,7 +99,7 @@
 
     <script id="newTaskItemTemplate" type="text/html">
       <div class="relative -space-y-px mb-4" id="task_<%= id %>">
-        <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded absolute top-1 right-1 flex items-center justify-center" id="delete_<%= id %>">
+        <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded absolute top-1 right-1 flex items-center justify-center" id="delete_<%= id %>" name="delete_<%= id %>">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
                 class="w-4 h-4 text-gray-600">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -103,16 +117,16 @@
         <div class="bg-white px-3 py-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
           <div class="flex justify-between">
             <label class="block text-xs font-medium text-gray-900">Details</label>
-            <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="newDetail_<%= id %>">
+            <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="newDetail_<%= id %>" name="newDetail_<%= id %>">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 text-gray-600">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
               </svg>
             </button>
           </div>
           <div id="details_<%= id %>">
-            <div class="flex items-center" id="detailItem_<%= id %>_<%= itemId %>">
-              <input type="text" name="detailItemValue_<%= id %>_<%= itemId %>" id="detailItemValue_<%= id %>_<%= itemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-              <button id="delete_detailItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+            <div class="flex items-center" id="detailItem_<%= id %>_<%= detailItemId %>">
+              <input type="text" name="detailItemValue_<%= id %>_<%= detailItemId %>" id="detailItemValue_<%= id %>_<%= detailItemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
+              <button id="delete_detailItem_<%= id %>_<%= detailItemId %>" name="delete_detailItem_<%= id %>_<%= detailItemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
                      class="w-4 h-4 text-gray-600">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -131,13 +145,32 @@
           <label for="timeSpentValue_<%= id %>" class="block text-xs font-medium text-gray-900">Time Spent Today</label>
           <input type="text" name="timeSpentValue_<%= id %>" id="timeSpentValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Minutes / Hours">
         </div>
-        <div class="bg-white px-3 pt-2.5 border-l border-r border-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+        <div class="bg-white px-3 pb-1.5 pt-2.5 border-l border-r border-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
           <label for="dependenciesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Dependencies</label>
           <input type="text" name="dependenciesValue_<%= id %>" id="dependenciesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Who are we relying on?">
         </div>
-        <div class="bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
-          <label for="challengesValue_<%= id %>" class="block text-xs font-medium text-gray-900">Challenges</label>
-          <input type="text" name="challengesValue_<%= id %>" id="challengesValue_<%= id %>" class="block w-full border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="What challenges came up?">
+        <div class="bg-white px-3 py-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
+          <div class="flex justify-between">
+            <label class="block text-xs font-medium text-gray-900">Challenges</label>
+            <button class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center" id="newChallenge_<%= id %>" name="newChallenge_<%= id %>">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12M6 12h12" />
+              </svg>
+            </button>
+          </div>
+          <div id="challenges_<%= id %>">
+            <div class="flex items-center" id="challengeItem_<%= id %>_<%= challengeItemId %>">
+              <input type="text" name="challengeItemValue_<%= id %>_<%= challengeItemId %>" id="challengeItemValue_<%= id %>_<%= challengeItemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="What challenges came up?">
+              <button id="delete_challengeItem_<%= id %>_<%= challengeItemId %>" name="delete_challengeItem_<%= id %>_<%= challengeItemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                     class="w-4 h-4 text-gray-600">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M18 6l-12 12" />
+                  <path d="M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="bg-white px-3 pt-2.5 border-l border-r border-t border-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 end-of-day-element hidden">
           <label class="block text-xs font-medium text-gray-900">Status</label>
@@ -159,7 +192,21 @@
     <script id="newDetailItemTemplate" type="text/html">
       <div class="flex items-center" id="detailItem_<%= id %>_<%= itemId %>">
         <input type="text" name="detailItemValue_<%= id %>_<%= itemId %>" id="detailItemValue_<%= id %>_<%= itemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Detail Item">
-        <button id="delete_detailItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+        <button id="delete_detailItem_<%= id %>_<%= itemId %>" name="delete_detailItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                class="w-4 h-4 text-gray-600">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M18 6l-12 12" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </script>
+
+    <script id="newChallengeItemTemplate" type="text/html">
+      <div class="flex items-center" id="challengeItem_<%= id %>_<%= itemId %>">
+        <input type="text" name="challengeItemValue_<%= id %>_<%= itemId %>" id="challengeItemValue_<%= id %>_<%= itemId %>" class="block w-11/12 border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-gray-400 sm:text-sm/6" placeholder="Challenge Item">
+        <button id="delete_challengeItem_<%= id %>_<%= itemId %>" name="delete_challengeItem_<%= id %>_<%= itemId %>" class="w-4 h-4 bg-white border border-gray-300 hover:bg-gray-50 rounded flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
                 class="w-4 h-4 text-gray-600">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
