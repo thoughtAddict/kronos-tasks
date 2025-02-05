@@ -28,6 +28,7 @@ npx tailwindcss -i ./src/input.css -o ./src/style.css
 - Save tasks to LocalStorage
 - Provide way to clear LocalStorage
 - Import / Export of Tasks
+- Ability to move Task Up/Down the List
 
 ## License
 

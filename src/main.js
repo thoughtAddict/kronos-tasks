@@ -264,7 +264,7 @@ const formatTodaysTasksToHTML = (taskListSource) => {
 
     // Generate the HTML
     htmlOutput += `
-      <ul style="list-style-type: disc; list-style-position: inside; font-size: 16px; margin-bottom: 20px;">
+      <ul style="list-style-type: disc; list-style-position: inside; font-size: 14px; margin-bottom: 20px;">
         <li style="padding: 2px 0;"><strong>Task</strong>: ${taskName}</li>
         <ul style="padding-left: 20px; list-style-type: circle; list-style-position: inside;">
           <li style="padding: 2px 0;"><strong>Details</strong>
